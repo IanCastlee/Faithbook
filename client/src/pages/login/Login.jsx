@@ -48,7 +48,7 @@ const Login = () => {
             Don't have an account?
             <Link to="/register">
               {" "}
-              <strong>Sign up</strong>{" "}
+              <strong>Sign dddup</strong>{" "}
             </Link>
           </span>
 
