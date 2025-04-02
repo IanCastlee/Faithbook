@@ -22,7 +22,8 @@ import multer from "multer";
 //middlewares
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    // origin: "http://localhost:5173",
+    origin: "https://faithbook-git-main-eyhan.vercel.app",
     credentials: true,
   })
 );
