@@ -46,13 +46,19 @@ export const login = (req, res) => {
     if (!checkPassword)
       return res.status(400).json("Wrong password or username!");
 
-    const token = jwt.sign({ id: data[0].id }, "secretkey");
+    const token = jwt.sign({ id: data[0].id }, "secretkey", {
+      expiresIn: "24h",
+    });
 
     const { password, ...others } = data[0];
 
     res
       .cookie("accessToken", token, {
         httpOnly: true,
+        // If you want to set the cookie for a specific domain (optional)
+        // domain: 'yourdomain.com',
+        secure: true,
+        sameSite: "none",
       })
       .status(200)
       .json(others);
