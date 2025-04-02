@@ -19,18 +19,30 @@ import cookieParser from "cookie-parser";
 import cors from "cors";
 import multer from "multer";
 
-//middlewares
-app.use(
-  cors({
-    // origin: "http://localhost:5173",
-    origin: "https://faithbook-git-main-eyhan.vercel.app",
-    credentials: true,
-  })
-);
+// Define allowed origins
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://faithbook-git-main-eyhan.vercel.app",
+];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    // Allow requests with no origin (like mobile apps or curl requests)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-//
+// Multer configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, "../client/public/upload");
@@ -40,13 +52,13 @@ const storage = multer.diskStorage({
   },
 });
 
-//upload file
 const upload = multer({ storage: storage });
 app.post("/api/upload", upload.single("file"), (req, res) => {
   const file = req.file;
   res.status(200).json(file.filename);
 });
 
+// Routes
 app.use("/api/users", userRoutes);
 app.use("/api/posts", postRoutes);
 app.use("/api/comments", commentRoutes);
