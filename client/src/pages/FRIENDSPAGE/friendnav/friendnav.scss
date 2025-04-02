@@ -1,0 +1,44 @@
+@import "../../../style.scss";
+.fnav {
+  @include themify($themes) {
+    .active {
+      border-bottom: 2px solid blue;
+    }
+
+    height: 60px;
+    background-color: themed("nav");
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    top: 0;
+    position: sticky;
+    padding: 0 10px;
+
+    @include mobile {
+      border-radius: 0;
+      top: 100px;
+    }
+
+    .list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 50px;
+
+      @include mobile {
+        gap: 30px;
+      }
+
+      .item {
+        list-style: none;
+        font-size: 14px;
+        font-weight: 700;
+        color: themed("txt");
+
+        &.active {
+          color: blue;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+@import "./style.scss";
+
+div {
+  .nav2 {
+    display: none;
+
+    @include mobile {
+      display: flex;
+    }
+  }
+  div {
+    .outlet {
+      margin-top: 60px;
+      width: 50%;
+      @include mobile {
+        width: 100%;
+        background: linear-gradient(to right, #663c8d, #d89a71);
+        margin-top: 0;
+      }
+    }
+  }
+}
+////FRIEND PAGE
+.friendPage {
+  @include themify($themes) {
+    top: 60px;
+    height: calc(100vh - 60px);
+    background-color: themed("cb");
+    padding: 0 5px;
+    top: 60px;
+    height: calc(100vh - 60px);
+    overflow: scroll;
+
+    @include mobile {
+      padding: 0;
+      height: 100vh;
+      width: 100%;
+    }
+
+    .friendPageOutlet {
+      padding: 5px 70px;
+
+      @include mobile {
+        padding: 5px 0;
+      }
+    }
+  }
+}
