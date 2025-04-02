@@ -2,9 +2,7 @@ import Story from "../../components/myday/Story";
 import Posts from "../../components/posts/Posts";
 import Share from "../../components/sharee/Share";
 import "./home.scss";
-import Post from "../../components/post/Post";
 import { useState } from "react";
-import StoryInput from "../../components/dropdown/StoryInput";
 
 const Home = () => {
   return (

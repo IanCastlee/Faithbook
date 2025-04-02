@@ -59,12 +59,6 @@ app.use("/api/allVerse", authAllVerseRoutes);
 app.use("/api/friendReqs", authAFrRoutes);
 app.use("/api/messages", authMessages);
 
-// app.listen(8800, () => {
-//   console.log("API working");
-// });
-
 const server = app.listen(8800, () => {
   console.log("API working on port 8800");
 });
-
-// io.attach(server);
