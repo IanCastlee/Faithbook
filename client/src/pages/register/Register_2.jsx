@@ -52,7 +52,11 @@ const Register_2 = () => {
       return;
     } else {
       try {
-        await axios.post("http://localhost:8800/api/auth/register", inputs);
+        // await axios.post("http://localhost:8800/api/auth/register", inputs);
+        await axios.post(
+          "https://faithbook.onrender.com/api/auth/register",
+          inputs
+        );
         setSuccess("Successfully registered!");
         setErr(null);
       } catch (err) {
