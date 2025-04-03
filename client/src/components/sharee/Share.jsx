@@ -12,12 +12,20 @@ const Share = () => {
   const [file, setFile] = useState(null);
   const [desc, setDesc] = useState("");
 
+  // Upload to Cloudinary
   const upload = async () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      const res = await makeRequest.post("/upload", formData);
-      return res.data;
+      formData.append("upload_preset", "YOUR_UPLOAD_PRESET"); // Make sure to add the upload preset name
+
+      // Send to Cloudinary
+      const res = await makeRequest.post(
+        "https://api.cloudinary.com/v1_1/dsghil6iz/image/upload",
+        formData
+      );
+
+      return res.data.secure_url; // Return the secure URL from Cloudinary
     } catch (err) {
       console.log(err);
     }
@@ -28,7 +36,7 @@ const Share = () => {
   const mutation = useMutation({
     mutationFn: (newPost) => makeRequest.post("/posts", newPost),
     onSuccess: () => {
-      // Invalidate and refetch
+      // Invalidate and refetch the posts after mutation
       queryClient.invalidateQueries({ queryKey: ["posts"] });
     },
   });
@@ -36,9 +44,16 @@ const Share = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     let imgUrl = "";
-    if (file) imgUrl = await upload();
+
+    if (file) {
+      // Get the Cloudinary image URL
+      imgUrl = await upload();
+    }
+
+    // Create a new post with description and image URL
     mutation.mutate({ desc, img: imgUrl });
 
+    // Reset the form after posting
     setDesc("");
     setFile(null);
   };
@@ -75,7 +90,6 @@ const Share = () => {
             className="share_input"
             value={desc}
           />
-          {/* <hr className="hr" /> */}
           <button className="btn-share" onClick={handleClick}>
             Post
           </button>

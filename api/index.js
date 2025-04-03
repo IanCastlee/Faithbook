@@ -1,5 +1,7 @@
 import express from "express";
-
+import dotenv from "dotenv";
+import uploadRoutes from "./routes/uploadRoutes.js";
+dotenv.config();
 const app = express();
 
 import userRoutes from "./routes/users.js";
@@ -42,21 +44,21 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-// Multer configuration
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "../client/public/upload");
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + file.originalname);
-  },
-});
+//// Multer configuration
+// const storage = multer.diskStorage({
+//   destination: function (req, file, cb) {
+//     cb(null, "../client/public/upload");
+//   },
+//   filename: function (req, file, cb) {
+//     cb(null, Date.now() + file.originalname);
+//   },
+// });
 
-const upload = multer({ storage: storage });
-app.post("/api/upload", upload.single("file"), (req, res) => {
-  const file = req.file;
-  res.status(200).json(file.filename);
-});
+// const upload = multer({ storage: storage });
+// app.post("/api/upload", upload.single("file"), (req, res) => {
+//   const file = req.file;
+//   res.status(200).json(file.filename);
+// });
 
 // Routes
 app.use("/api/users", userRoutes);
@@ -71,6 +73,8 @@ app.use("/api/userVerse", authUserVerseRoutes);
 app.use("/api/allVerse", authAllVerseRoutes);
 app.use("/api/friendReqs", authAFrRoutes);
 app.use("/api/messages", authMessages);
+
+app.use("/api/", uploadRoutes);
 
 const server = app.listen(8800, () => {
   console.log("API working on port 8800");
