@@ -11,7 +11,7 @@ import { useState } from "react";
 import NotifDrop from "../dropdown/NotifDrop";
 
 const Navar = () => {
-  const { currentUser } = useContext(AuthContext);
+  const { currentUser, setChatBoxStatus } = useContext(AuthContext);
 
   const [showUsersetting, setUserSetting] = useState(false);
   const [showMessageBox, setMessageBox] = useState(false);
@@ -20,6 +20,7 @@ const Navar = () => {
   const handleMsg = () => {
     setMessageBox(!showMessageBox);
     setNotifBox(false);
+    setChatBoxStatus(!showMessageBox);
   };
   const handleNoti = () => {
     setNotifBox(!showNotifBox);
@@ -59,7 +60,12 @@ const Navar = () => {
               <img src="../assets/mail.png" alt="" className="nav_iconn" />
               <span className="dot_1">4</span>
             </div>
-            {showMessageBox && <Dropdown setMessageBox={setMessageBox} />}
+            {showMessageBox && (
+              <Dropdown
+                chatStatus={showMessageBox}
+                setMessageBox={setMessageBox}
+              />
+            )}
           </>
 
           <>

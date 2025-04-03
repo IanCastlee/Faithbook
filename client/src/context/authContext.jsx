@@ -8,15 +8,20 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("mangagamit")) || null
   );
 
+  const [chatBoxStatus, setChatBoxStatus] = useState(false);
+
   const login = async (inputs) => {
     const res = await axios.post(
+      // "http://localhost:8800/api/auth/login",
       "https://faithbook.onrender.com/api/auth/login",
+
       inputs,
       {
         withCredentials: true,
       }
     );
 
+    console.log("RESPONSE DATA : ", res.data);
     setCurrentUser(res.data);
   };
 
@@ -24,8 +29,12 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.setItem("mangagamit", JSON.stringify(currentUser));
   }, [currentUser]);
 
+  console.log("setChatboxStatus : ", chatBoxStatus);
+
   return (
-    <AuthContext.Provider value={{ currentUser, login }}>
+    <AuthContext.Provider
+      value={{ currentUser, login, setChatBoxStatus, chatBoxStatus }}
+    >
       {children}
     </AuthContext.Provider>
   );

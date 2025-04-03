@@ -11,7 +11,7 @@ import Chat from "../../pages/CHAT/chat/Chat";
 
 import { io } from "socket.io-client";
 
-const Dropdown = ({ setMessageBox }) => {
+const Dropdown = ({ setMessageBox, chatStatus }) => {
   useEffect(() => {
     const socket = io("http://localhost:8800");
   }, []);

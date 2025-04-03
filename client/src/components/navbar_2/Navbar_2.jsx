@@ -5,8 +5,13 @@ import { TbSquareLetterT } from "react-icons/tb";
 import { PiUsers } from "react-icons/pi";
 import { PiChurchDuotone } from "react-icons/pi";
 import { HiOutlineHome } from "react-icons/hi2";
+import { useContext } from "react";
+import { AuthContext } from "../../context/authContext";
 
 const Navbar_2 = ({ closeAll }) => {
+  const { chatBoxStatus } = useContext(AuthContext);
+  console.log("CHAT BOX : ", chatBoxStatus);
+
   return (
     <div className="nav_2">
       <NavLink to="/" onClick={closeAll} style={{ textDecoration: "none" }}>

@@ -54,6 +54,7 @@ const Register = () => {
       try {
         await axios.post(
           "https://faithbook.onrender.com/api/auth/register",
+          // "http://localhost/8800/api/auth/register",
           inputs
         );
         setSuccess("Successfully registered!");

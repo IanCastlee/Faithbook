@@ -1,5 +1,8 @@
 @import "../../style.scss";
 .nav_2 {
+  &.hide {
+    display: none;
+  }
   .active {
     border-bottom: 2px solid blue;
   }
