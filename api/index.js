@@ -1,7 +1,7 @@
 import express from "express";
-import dotenv from "dotenv";
-import uploadRoutes from "./routes/uploadRoutes.js";
-dotenv.config();
+// import dotenv from "dotenv";
+// import uploadRoutes from "./routes/uploadRoutes.js";
+// dotenv.config();
 const app = express();
 
 import userRoutes from "./routes/users.js";
@@ -74,7 +74,7 @@ app.use("/api/allVerse", authAllVerseRoutes);
 app.use("/api/friendReqs", authAFrRoutes);
 app.use("/api/messages", authMessages);
 
-app.use("/api/", uploadRoutes);
+// app.use("/api/", uploadRoutes);
 
 const server = app.listen(8800, () => {
   console.log("API working on port 8800");
