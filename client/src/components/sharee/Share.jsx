@@ -17,7 +17,7 @@ const Share = () => {
     try {
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "YOUR_UPLOAD_PRESET"); // Make sure to add the upload preset name
+      formData.append("upload_preset", "image_upload_preset"); // Make sure to add the upload preset name
 
       // Send to Cloudinary
       const res = await makeRequest.post(
